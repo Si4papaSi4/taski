@@ -159,19 +159,6 @@ jobs:
     steps:
     - name: Checkout repo
       uses: actions/checkout@v3
-    - name: Remove old docker-compose.production.yml
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USER }}
-        key: ${{ secrets.SSH_KEY }}
-        passphrase: ${{ secrets.SSH_PASSPHRASE }}
-        # Параметр script передаёт в action appleboy/ssh-action команды,
-        # которые нужно выполнить на сервере,
-        # с которым установлено соединение
-        script: |
-          cd taski
-          sudo rm -r docker-compose.production.yml
     # Копируем docker-compose.production.yml на продакшен-сервер
     - name: Copy docker-compose.yml via ssh
       uses: appleboy/scp-action@master
